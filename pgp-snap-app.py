@@ -157,6 +157,7 @@ class Preview(QWidget):
         ftp.cwd(desired_dir)
         self.remote_img = io.BytesIO()
         ftp.retrbinary('RETR '+desired_dir, self.fetch_callback)
+        ftp.delete(desired_dir)
         ftp.quit()
         self.remote_img.seek(0)
         decrypted_img = self.decrypt(self.remote_img.read().decode())
